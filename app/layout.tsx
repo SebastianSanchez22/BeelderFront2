@@ -1,4 +1,4 @@
-import Header from "../components/header"
+import Header from "@/components/header"
 import './globals.css'
 
 export const metadata = {
@@ -13,14 +13,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <title>FrontEnd App For Beelder</title>
-      </head>
-      <body>
-        <Header /> 
+    <head>
+      <title>FrontEnd App For Beelder</title>
+    </head>
+    <body>
+      <Header />
+      <div>
         {children}
-      </body>
-    </html>
+      </div>
+    </body>
+  </html>
   )
 }
 

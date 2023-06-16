@@ -1,36 +1,18 @@
-import Link from "next/link"
-
-const links = [{
-  label: 'Home',
-  route: '/',
-}, {
-  label: 'Maquinas',
-  route: '/maquinas',
-}, {
-  label: 'Ordenes',
-  route: '/ordenes',
-},{
-  label: 'Proveedores',
-  route: '/proveedores',
-}, {
-  label: 'Clientes',
-  route: '/clientes',
-}]
+import SideBarButton from "./sideBarButton";
+import Sidebar from "./sidebar";
 
 export default function Header() {
-    return (
-        <header className="border rounded border-solid border-[#f0f0f0] p-4">
-          <nav>
-            <ul className="flex gap-4">
-              {links.map(({ label, route }) => (
-                <li key={route}>
-                  <Link href={route}>
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </header>
-    )
+  return (
+    <header className="flex justify-between items-center py-4 px-8">
+      <div className="flex items-center">
+        <img src="/logo.png" alt="Logo" className="h-8 mr-4" />
+        <h1 className="text-2xl font-bold text-amber-400">Beelder</h1>
+      </div>
+      <div className="relative">
+      <SideBarButton>
+        <Sidebar />
+      </SideBarButton>
+      </div>
+    </header>
+  );
 }
