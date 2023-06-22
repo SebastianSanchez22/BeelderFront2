@@ -3,8 +3,7 @@ import maquinasReducer from './sliceMaquinas';
 
 const store = configureStore({
   reducer: {
-    maquinas: maquinasReducer,
-    // Otros reducers si los tienes
+    maquinas: maquinasReducer
   },
 });
 

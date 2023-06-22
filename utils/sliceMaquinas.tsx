@@ -9,7 +9,7 @@ export interface Maquina {
 }
 
 export const crearMaquina = createAsyncThunk(
-  'maquinas/crearMaquina',
+  'maquinas/create',
   async (machineData: Maquina) => {
     const response = await fetch('http://localhost:3000/machines', {
       method: 'POST',
