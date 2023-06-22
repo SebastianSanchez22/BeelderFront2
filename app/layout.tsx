@@ -12,15 +12,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-white">
     <head>
       <title>FrontEnd App For Beelder</title>
     </head>
     <body>
       <Header />
-      <div>
-        {children}
-      </div>
+      {children}
     </body>
   </html>
   )

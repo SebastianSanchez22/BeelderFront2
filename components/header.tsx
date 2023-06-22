@@ -10,7 +10,7 @@ export default function Header() {
       </div>
       <div className="relative">
       <SideBarButton>
-        <Sidebar />
+        
       </SideBarButton>
       </div>
     </header>

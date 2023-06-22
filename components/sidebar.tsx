@@ -19,7 +19,7 @@ const links = [{
 
 export default function Sidebar() {
     return (
-        <aside className="border rounded border-solid border-[#f0f0f0] p-4 flex flex-col-reverse absolute top-0 right-[-1rem] mt-12">
+        <aside className="border rounded-md border-solid border-[#f0f0f0] p-4 flex flex-col-reverse absolute right-[-1rem] bg-black z-0">
           <nav>
             <ul className="flex flex-col gap-4">
               {links.map(({ label, route }) => (
