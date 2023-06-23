@@ -8,10 +8,10 @@ config.autoAddCss = false;
 
 const links = [
   { label: 'Home', route: '/' },
-  { label: 'Máquinas', route: '/maquinas'},
-  { label: 'Órdenes', route: '/ordenes'},
-  { label: 'Proveedores', route: '/proveedores',},
-  { label: 'Clientes', route: '/clientes'},
+  { label: 'Máquinas', route: '/machines'},
+  { label: 'Órdenes', route: '/orders'},
+  { label: 'Proveedores', route: '/suppliers',},
+  { label: 'Clientes', route: '/clients'},
 ];
 
 export default function SideBarButton({ children }: { children: React.ReactNode }) {
@@ -28,10 +28,10 @@ export default function SideBarButton({ children }: { children: React.ReactNode 
   return (
     <div className="relative">
       <button
-        className="fixed top-2 right-4 z-20 flex items-center justify-center w-12 h-12 rounded border border-solid border-[#f0f0f0]"
+        className="fixed top-4 right-4 z-20 flex items-center justify-center w-8 h-8 rounded border border-solid border-[#f0f0f0]"
         onClick={handleSidebarToggle}
       >
-        <FontAwesomeIcon icon={isSidebarOpen ? faTimes : faBars} size="lg" />
+        <FontAwesomeIcon icon={isSidebarOpen ? faTimes : faBars} size="2x" />
       </button>
       {isSidebarOpen && (
         <aside className="fixed top-0 right-0 h-fit w-40 p-4 bg-black z-10 rounded-md">

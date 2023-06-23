@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import maquinasReducer from './sliceMaquinas';
+import machinesReducer from './machinesSlice';
 
 const store = configureStore({
   reducer: {
-    maquinas: maquinasReducer
+    machines: machinesReducer
   },
 });
 

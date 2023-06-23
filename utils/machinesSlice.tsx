@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export interface Maquina {
+export interface Machine {
   machineId: string;
   name: string;
   category: string;
@@ -8,9 +8,10 @@ export interface Maquina {
   supplierId: string;
 }
 
-export const crearMaquina = createAsyncThunk(
-  'maquinas/create',
-  async (machineData: Maquina) => {
+export const createMachine = createAsyncThunk(
+  'machines/create',
+  async (machineData: Machine) => {
+    console.log("Llego antes del fetch")
     const response = await fetch('http://localhost:3000/machines', {
       method: 'POST',
       body: JSON.stringify(machineData),
@@ -23,15 +24,15 @@ export const crearMaquina = createAsyncThunk(
   }
 );
 
-const sliceMaquinas = createSlice({
-  name: 'maquinas',
-  initialState: [] as Maquina[],
+const machinesSlice = createSlice({
+  name: 'Machines',
+  initialState: [] as Machine[],
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(crearMaquina.fulfilled, (state, action) => {
+    builder.addCase(createMachine.fulfilled, (state, action) => {
       state.push(action.payload);
     });
   },
 });
 
-export default sliceMaquinas.reducer;
+export default machinesSlice.reducer;

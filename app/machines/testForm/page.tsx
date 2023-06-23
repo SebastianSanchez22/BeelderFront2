@@ -1,9 +1,9 @@
 'use client'
 import { useState } from 'react';
-import { Maquina } from "@/utils/sliceMaquinas";
-export default function MaquinariaPage() {
+import { Machine } from "@/utils/machinesSlice";
+export default function CreateMachinePage() {
 
-    const [formData, setFormData] = useState<Maquina>({
+    const [formData, setFormData] = useState<Machine>({
         machineId: '',
         name: '',
         category: '',
@@ -76,7 +76,7 @@ export default function MaquinariaPage() {
             />
           </div>
         </div>
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center mt-8">
         <button
             type="submit"
             className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500"
