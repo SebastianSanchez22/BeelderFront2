@@ -13,6 +13,7 @@ export default function MachinesForm() {
     const { name, value } = e.target;
     // Update form state
     if (name in machineData) {
+      //console.log("Value: " + value)
       dispatch(setField({ field: name as keyof Machine, value }));
     }
   };
@@ -32,7 +33,7 @@ export default function MachinesForm() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex flex-col items-center justify-start min-h-screen pt-16">
       <form onSubmit={handleSubmit} className="w-80 mx-10 bg-black text-white p-6 rounded-lg shadow-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
@@ -45,7 +46,7 @@ export default function MachinesForm() {
               name="machineId"
               value={machineData.machineId}
               onChange={handleChange}
-              className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-white"
+              className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
             />
           </div>
           <div>
@@ -58,7 +59,7 @@ export default function MachinesForm() {
             name="name"
             value={machineData.name}
             onChange={handleChange}
-            className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-white"
+            className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
             />
           </div>
           <div>
@@ -71,7 +72,7 @@ export default function MachinesForm() {
             name="category"
             value={machineData.category}
             onChange={handleChange}
-            className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-white"
+            className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
             />
           </div>
           <div>
@@ -84,7 +85,7 @@ export default function MachinesForm() {
             name="totalQuantity"
             value={machineData.totalQuantity}
             onChange={handleChange}
-            className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-white"
+            className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
             />
           </div>
           <div>
@@ -97,7 +98,7 @@ export default function MachinesForm() {
             name="supplierId"
             value={machineData.supplierId}
             onChange={handleChange}
-            className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-white"
+            className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
             />
           </div>
         </div>

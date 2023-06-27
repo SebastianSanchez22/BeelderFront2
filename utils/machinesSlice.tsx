@@ -39,7 +39,8 @@ const machinesSlice = createSlice({
 
 export const createMachine = createAsyncThunk('machines/create', async (machineData: Machine) => {
     console.log("Llego antes del fetch")
-    const response = await fetch('http://localhost:3000/machines', {
+    console.log(machineData)
+    const response = await fetch('http://localhost:4000/machine', {
       method: 'POST',
       body: JSON.stringify(machineData),
       headers: {
