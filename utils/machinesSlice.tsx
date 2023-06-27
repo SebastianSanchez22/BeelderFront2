@@ -8,7 +8,7 @@ export interface Machine {
   supplierId: string;
 }
 
-const initialState: Machine[] = [];
+export const initialState: Machine[] = [];
 
 const machinesSlice = createSlice({
   name: 'Machines',
@@ -16,10 +16,15 @@ const machinesSlice = createSlice({
   reducers: {
     setField: (state, action: PayloadAction<{ field: keyof Machine; value: string | number }>) => {
       const { field, value } = action.payload;
-      return state.map(machine => ({
+      return state.map(machine => {
+      if (field in machine) {
+        return {
         ...machine,
         [field]: value,
-      }));
+      };
+    }
+    return machine;
+  });
     },
     resetForm: () => {
       return initialState;

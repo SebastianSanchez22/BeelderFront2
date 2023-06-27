@@ -1,7 +1,9 @@
+"use client"
+
 import Header from "@/components/header"
 import './globals.css'
-import { Provider } from "react-redux";
-import { store } from "../utils/store";
+import { Providers } from "@/utils/provider"
+
 
 export const metadata = {
   title: 'Next.js',
@@ -20,7 +22,9 @@ export default function RootLayout({
     </head>
     <body>
       <Header />
-      <Provider store={store}>{children}</Provider>
+      <div className="bg-white">
+        <Providers>{children}</Providers>
+      </div>
     </body>
   </html>
   )

@@ -1,13 +1,13 @@
 "use client"
 
 import { useDispatch, useSelector } from 'react-redux';
-import { createMachine } from '../utils/machinesSlice';
+import { createMachine, initialState } from '../utils/machinesSlice';
 import { setField, Machine} from '../utils/machinesSlice';
 import { AppDispatch, RootState } from '@/utils/store';
 
 export default function MachinesForm() {
   const dispatch = useDispatch<AppDispatch>();
-  const machineData = useSelector((state: RootState) => state.machines[0]);
+  const machineData = useSelector((state: RootState) => state.machines[0] || initialState);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
