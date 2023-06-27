@@ -1,27 +1,34 @@
-'use client'
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+"use client"
+
+import { useDispatch, useSelector } from 'react-redux';
 import { createMachine } from '../utils/machinesSlice';
-import { Machine } from '../utils/machinesSlice';
+import { setField, Machine} from '../utils/machinesSlice';
+import { AppDispatch, RootState } from '@/utils/store';
 
 export default function MachinesForm() {
-  const dispatch = useDispatch();
-  const [formData, setFormData] = useState<Machine>({
-    machineId: '',
-    name: '',
-    category: '',
-    totalQuantity: 0,
-    supplierId: '',
-  });
+  const dispatch = useDispatch<AppDispatch>();
+  const machineData = useSelector((state: RootState) => state.machines[0]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    // Update form state
+    if (name in machineData) {
+      dispatch(setField({ field: name as keyof Machine, value }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(createMachine(formData) as any);
+
+    // Send POST request to API
+    dispatch(createMachine(machineData));
+
+    // Reset form
+    dispatch(setField({ field: 'machineId', value: '' }));
+    dispatch(setField({ field: 'name', value: '' }));
+    dispatch(setField({ field: 'category', value: '' }));
+    dispatch(setField({ field: 'totalQuantity', value: 0 }));
+    dispatch(setField({ field: 'supplierId', value: '' }));
   };
 
   return (
@@ -36,7 +43,7 @@ export default function MachinesForm() {
               type="text"
               id="machineId"
               name="machineId"
-              value={formData.machineId}
+              value={machineData.machineId}
               onChange={handleChange}
               className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-white"
             />
@@ -49,7 +56,7 @@ export default function MachinesForm() {
             type="text"
             id="name"
             name="name"
-            value={formData.name}
+            value={machineData.name}
             onChange={handleChange}
             className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-white"
             />
@@ -62,7 +69,7 @@ export default function MachinesForm() {
             type="text"
             id="category"
             name="category"
-            value={formData.category}
+            value={machineData.category}
             onChange={handleChange}
             className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-white"
             />
@@ -75,7 +82,7 @@ export default function MachinesForm() {
             type="number"
             id="totalQuantity"
             name="totalQuantity"
-            value={formData.totalQuantity}
+            value={machineData.totalQuantity}
             onChange={handleChange}
             className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-white"
             />
@@ -88,7 +95,7 @@ export default function MachinesForm() {
             type="text"
             id="supplierId"
             name="supplierId"
-            value={formData.supplierId}
+            value={machineData.supplierId}
             onChange={handleChange}
             className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-white"
             />

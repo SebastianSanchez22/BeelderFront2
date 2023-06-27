@@ -1,5 +1,7 @@
 import Header from "@/components/header"
 import './globals.css'
+import { Provider } from "react-redux";
+import { store } from "../utils/store";
 
 export const metadata = {
   title: 'Next.js',
@@ -18,7 +20,7 @@ export default function RootLayout({
     </head>
     <body>
       <Header />
-      <div className="bg-white"> {children} </div>
+      <Provider store={store}>{children}</Provider>
     </body>
   </html>
   )

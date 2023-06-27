@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 export interface Machine {
   machineId: string;
@@ -8,9 +8,31 @@ export interface Machine {
   supplierId: string;
 }
 
-export const createMachine = createAsyncThunk(
-  'machines/create',
-  async (machineData: Machine) => {
+const initialState: Machine[] = [];
+
+const machinesSlice = createSlice({
+  name: 'Machines',
+  initialState,
+  reducers: {
+    setField: (state, action: PayloadAction<{ field: keyof Machine; value: string | number }>) => {
+      const { field, value } = action.payload;
+      return state.map(machine => ({
+        ...machine,
+        [field]: value,
+      }));
+    },
+    resetForm: () => {
+      return initialState;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(createMachine.fulfilled, (state, action) => {
+      state.push(action.payload);
+    });
+  },
+});
+
+export const createMachine = createAsyncThunk('machines/create', async (machineData: Machine) => {
     console.log("Llego antes del fetch")
     const response = await fetch('http://localhost:3000/machines', {
       method: 'POST',
@@ -24,15 +46,6 @@ export const createMachine = createAsyncThunk(
   }
 );
 
-const machinesSlice = createSlice({
-  name: 'Machines',
-  initialState: [] as Machine[],
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(createMachine.fulfilled, (state, action) => {
-      state.push(action.payload);
-    });
-  },
-});
+export const { setField, resetForm } = machinesSlice.actions;
 
 export default machinesSlice.reducer;
