@@ -2,18 +2,21 @@
 
 import { useCreateMachineMutation } from '@/utils/redux/api/machinesApi';
 import { useState } from 'react';
+import { Machine } from  '@/utils/interfaces'
+
+const emptyMachineData: Machine = {
+  machineId: '',
+  name: '',
+  category: '',
+  totalQuantity: 0,
+  supplierId: '',
+};
 
 export default function MachinesForm() {
   const [createMachine] = useCreateMachineMutation(); // useCreateMachineMutation hook from RTK Query
 
   // Local state to manage the form input values
-  const [machineData, setMachineData] = useState({
-    machineId: '',
-    name: '',
-    category: '',
-    totalQuantity: 0,
-    supplierId: '',
-  });
+  const [machineData, setMachineData] = useState(emptyMachineData);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Handle form input changes
@@ -27,7 +30,7 @@ export default function MachinesForm() {
     e.preventDefault();
 
     // Build the formData object with the form values.
-    const formData = {
+    const formData: Machine = {
       machineId: machineData.machineId,
       name: machineData.name,
       category: machineData.category,

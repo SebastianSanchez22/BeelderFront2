@@ -2,17 +2,21 @@
 
 import { useCreateSupplierMutation } from '@/utils/redux/api/suppliersApi';
 import { useState } from 'react';
+import { Supplier } from '@/utils/interfaces';
+
+const emptySupplierData: Supplier = {
+  supplierId: '',
+  name: '',
+  timezone: '',
+  country: '',
+};
+
 
 export default function SuppliersForm() {
   const [createSupplier] = useCreateSupplierMutation(); // useCreateSupplierMutation hook from RTK Query
 
   // Local state to manage the form input values
-  const [supplierData, setSupplierData] = useState({
-    supplierId: '',
-    name: '',
-    timezone: '',
-    country: '',
-  });
+  const [supplierData, setSupplierData] = useState(emptySupplierData);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Handle form input changes

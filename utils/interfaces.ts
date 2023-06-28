@@ -9,4 +9,6 @@ export interface Machine {
 export interface Supplier {
     supplierId: string;
     name: string;
+    timezone: string;
+    country: string;
 }
