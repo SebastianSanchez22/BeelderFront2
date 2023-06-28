@@ -2,7 +2,7 @@
 
 import Header from "@/components/header"
 import './globals.css'
-import { Providers } from "@/utils/provider"
+import { Providers } from "@/utils/redux/provider"
 
 
 export const metadata = {

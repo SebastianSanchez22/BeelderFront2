@@ -5,3 +5,8 @@ export interface Machine {
     totalQuantity: number;
     supplierId: string;
   }
+
+export interface Supplier {
+    supplierId: string;
+    name: string;
+}

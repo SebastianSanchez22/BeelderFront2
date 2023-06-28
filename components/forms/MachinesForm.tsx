@@ -1,6 +1,6 @@
 "use client"
 
-import { useCreateMachineMutation } from '@/utils/machinesApi';
+import { useCreateMachineMutation } from '@/utils/redux/api/machinesApi';
 import { useState } from 'react';
 
 export default function MachinesForm() {
@@ -60,7 +60,7 @@ export default function MachinesForm() {
               name="machineId"
               value={machineData.machineId}
               onChange={handleChange}
-              className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
+              className="w-full mt-1 p-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
             />
           </div>
           <div>
@@ -73,7 +73,7 @@ export default function MachinesForm() {
             name="name"
             value={machineData.name}
             onChange={handleChange}
-            className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
+            className="w-full mt-1 p-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
             />
           </div>
           <div>
@@ -86,7 +86,7 @@ export default function MachinesForm() {
             name="category"
             value={machineData.category}
             onChange={handleChange}
-            className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
+            className="w-full mt-1 p-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
             />
           </div>
           <div>
@@ -99,7 +99,7 @@ export default function MachinesForm() {
             name="totalQuantity"
             value={machineData.totalQuantity}
             onChange={handleChange}
-            className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
+            className="w-full mt-1 p-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
             />
           </div>
           <div>
@@ -112,7 +112,7 @@ export default function MachinesForm() {
             name="supplierId"
             value={machineData.supplierId}
             onChange={handleChange}
-            className="w-full mt-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
+            className="w-full mt-1 p-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
             />
           </div>
         </div>
