@@ -4,8 +4,9 @@ import { useCreateMachineMutation } from '@/utils/machinesApi';
 import { useState } from 'react';
 
 export default function MachinesForm() {
-  const [createMachine] = useCreateMachineMutation(); // useCreateMachineMutation hook
+  const [createMachine] = useCreateMachineMutation(); // useCreateMachineMutation hook from RTK Query
 
+  // Local state to manage the form input values
   const [machineData, setMachineData] = useState({
     machineId: '',
     name: '',
@@ -15,6 +16,7 @@ export default function MachinesForm() {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Handle form input changes
     setMachineData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
@@ -33,8 +35,9 @@ export default function MachinesForm() {
       supplierId: machineData.supplierId
     };
 
+    // Call the createMachine mutation function with the formData object
     createMachine(formData)
-    .unwrap() // Unwrap the promise result
+    .unwrap() 
     .then((result) => {
       console.log('Machine created successfully:', result);
     })
