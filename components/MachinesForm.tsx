@@ -4,7 +4,7 @@ import { useCreateMachineMutation } from '@/utils/machinesApi';
 import { useState } from 'react';
 
 export default function MachinesForm() {
-  const [createMachine] = useCreateMachineMutation(); // Utiliza el hook useCreateMachineMutation
+  const [createMachine] = useCreateMachineMutation(); // useCreateMachineMutation hook
 
   const [machineData, setMachineData] = useState({
     machineId: '',
@@ -24,7 +24,7 @@ export default function MachinesForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Construye el objeto formData con los valores del formulario
+    // Build the formData object with the form values.
     const formData = {
       machineId: machineData.machineId,
       name: machineData.name,
@@ -33,16 +33,13 @@ export default function MachinesForm() {
       supplierId: machineData.supplierId
     };
 
-    // Llama a la función createMachine con los datos de la máquina
     createMachine(formData)
-    .unwrap() // Desempaqueta el resultado de la promesa
+    .unwrap() // Unwrap the promise result
     .then((result) => {
-      // Maneja la respuesta exitosa aquí
-      console.log('Máquina creada exitosamente:', result);
+      console.log('Machine created successfully:', result);
     })
     .catch((error) => {
-      // Maneja los errores de la mutación aquí
-      console.error('Error al crear la máquina:', error);
+      console.error('Error creating machine:', error);
     });
   };
 
