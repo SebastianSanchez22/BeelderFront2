@@ -1,35 +1,49 @@
 "use client"
 
-import { useDispatch, useSelector } from 'react-redux';
-import { createMachine, initialState } from '../utils/machinesSlice';
-import { setField, Machine} from '../utils/machinesSlice';
-import { AppDispatch, RootState } from '@/utils/store';
+import { useCreateMachineMutation } from '@/utils/machinesApi';
+import { useState } from 'react';
 
 export default function MachinesForm() {
-  const dispatch = useDispatch<AppDispatch>();
-  const machineData = useSelector((state: RootState) => state.machines[0] || initialState);
+  const [createMachine] = useCreateMachineMutation(); // Utiliza el hook useCreateMachineMutation
+
+  const [machineData, setMachineData] = useState({
+    machineId: '',
+    name: '',
+    category: '',
+    totalQuantity: 0,
+    supplierId: '',
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    // Update form state
-    if (name in machineData) {
-      //console.log("Value: " + value)
-      dispatch(setField({ field: name as keyof Machine, value }));
-    }
+    setMachineData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Send POST request to API
-    dispatch(createMachine(machineData));
+    // Construye el objeto formData con los valores del formulario
+    const formData = {
+      machineId: machineData.machineId,
+      name: machineData.name,
+      category: machineData.category,
+      totalQuantity: Number(machineData.totalQuantity),
+      supplierId: machineData.supplierId
+    };
 
-    // Reset form
-    dispatch(setField({ field: 'machineId', value: '' }));
-    dispatch(setField({ field: 'name', value: '' }));
-    dispatch(setField({ field: 'category', value: '' }));
-    dispatch(setField({ field: 'totalQuantity', value: 0 }));
-    dispatch(setField({ field: 'supplierId', value: '' }));
+    // Llama a la función createMachine con los datos de la máquina
+    createMachine(formData)
+    .unwrap() // Desempaqueta el resultado de la promesa
+    .then((result) => {
+      // Maneja la respuesta exitosa aquí
+      console.log('Máquina creada exitosamente:', result);
+    })
+    .catch((error) => {
+      // Maneja los errores de la mutación aquí
+      console.error('Error al crear la máquina:', error);
+    });
   };
 
   return (
