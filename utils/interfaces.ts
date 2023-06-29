@@ -12,3 +12,10 @@ export interface Supplier {
     timezone: string;
     country: string;
 }
+
+export interface Client {
+    clientId: string;
+    name: string;
+    address: string;
+    phone: number;
+}
