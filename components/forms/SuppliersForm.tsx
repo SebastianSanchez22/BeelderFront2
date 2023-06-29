@@ -3,6 +3,7 @@
 import { useCreateSupplierMutation } from '@/utils/redux/api/suppliersApi';
 import { useState } from 'react';
 import { Supplier } from '@/utils/interfaces';
+import { timezones } from '@/utils/timezones';
 
 const emptySupplierData: Supplier = {
   supplierId: '',
@@ -11,19 +12,40 @@ const emptySupplierData: Supplier = {
   country: '',
 };
 
-
 export default function SuppliersForm() {
-  const [createSupplier] = useCreateSupplierMutation(); // useCreateSupplierMutation hook from RTK Query
+  // useCreateSupplierMutation hook from RTK Query
+  const [createSupplier] = useCreateSupplierMutation(); 
 
   // Local state to manage the form input values
   const [supplierData, setSupplierData] = useState(emptySupplierData);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Local state to manage the show/hide of the timezones list
+  const [showAllTimezones, setShowAllTimezones] = useState(false);
+
+  // Sort the timezones by display value and then by name
+  const sortedTimezones = timezones.slice().sort((a, b) => {
+    if (a.display !== b.display) {
+      return a.display - b.display;
+    } else {
+      return a.timezones.localeCompare(b.timezones);
+    }
+  });
+
+  // Filtering the timezones list depending on the button (show all or show only relevant timezones)
+  const displayedTimezones = showAllTimezones ? sortedTimezones : sortedTimezones.filter((t) => t.display !== 100);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    
     // Handle form input changes
-    setSupplierData((prevData) => ({
-      ...prevData,
-      [e.target.name]: e.target.value,
-    }));
+    if (value === "showMore") {
+      setShowAllTimezones(true);
+    } else {
+      setSupplierData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -82,14 +104,22 @@ export default function SuppliersForm() {
             <label htmlFor="timezone" className="text-sm font-medium">
               Zona Horaria
             </label>
-            <input
-              type="text"
+            <select
               id="timezone"
               name="timezone"
               value={supplierData.timezone}
               onChange={handleChange}
               className="w-full mt-1 p-1 focus:ring-amber-500 focus:border-amber-500 block shadow-sm sm:text-sm border-gray-300 rounded-md bg-amber-300 text-black"
-            />
+            >
+              {displayedTimezones.map((tz) => (
+                <option key={tz.timezones} value={tz.timezones}>
+                  {tz.timezones}
+                </option>
+              ))}
+              {!showAllTimezones && (
+                <option value="showMore">Mostrar más</option>
+              )}
+            </select>
           </div>
           <div>
             <label htmlFor="country" className="text-sm font-medium">
