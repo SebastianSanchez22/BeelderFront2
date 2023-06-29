@@ -117,7 +117,9 @@ export default function SuppliersForm() {
                 </option>
               ))}
               {!showAllTimezones && (
-                <option value="showMore">Mostrar más</option>
+                 <option value="showMore" className="font-bold">
+                 Mostrar más
+               </option>
               )}
             </select>
           </div>
