@@ -6,12 +6,13 @@ export interface Machine {
     supplierId: string;
   }
 
-export interface Supplier {
+  export interface Supplier {
     supplierId: string;
     name: string;
     timezone: string;
     country: string;
-}
+    machinesList?: string[];
+  }
 
 export interface Client {
     clientId: string;

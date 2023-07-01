@@ -1,5 +1,10 @@
+import SuppliersList from "@/components/lists/SuppliersList";
+
 export default function SuppliersPage() {
     return (
-      <h1 className="text-center text-xl text-amber-400 underline">Esta es la página de los proveedores</h1>
+    <div className="flex flex-col items-center justify-start min-h-screen pt-16">
+      <h1 className="text-black text-center text-3xl font-bold mb-8">Lista de proveedores</h1>
+      <SuppliersList/>
+    </div>
     )
   }

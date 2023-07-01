@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { Supplier } from '@/utils/interfaces';
 
 // Set up an API for suppliers
 export const suppliersApi = createApi({
@@ -8,7 +9,7 @@ export const suppliersApi = createApi({
   }),
   tagTypes: ['Supplier'],
   endpoints: (builder) => ({
-    createSupplier: builder.mutation({
+    createSupplier: builder.mutation<Supplier, Partial<Supplier>>({
       query: (payload) => ({
         url: '/suppliers', // URL for the create supplier request
         method: 'POST', // HTTP method
@@ -19,7 +20,11 @@ export const suppliersApi = createApi({
       }),
       invalidatesTags: ['Supplier'],
     }),
+    getSuppliers: builder.query<Supplier[], void>({
+      query: () => '/suppliers',
+      providesTags: ['Supplier'],
+    }),
   }),
 });
 
-export const { useCreateSupplierMutation } = suppliersApi;
+export const { useCreateSupplierMutation, useGetSuppliersQuery } = suppliersApi;

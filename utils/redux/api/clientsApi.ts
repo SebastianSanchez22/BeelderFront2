@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { Client } from '@/utils/interfaces';
 
 // Set up an API for clients
 export const clientsApi = createApi({
@@ -8,7 +9,7 @@ export const clientsApi = createApi({
   }),
   tagTypes: ['Client'],
   endpoints: (builder) => ({
-    createClient: builder.mutation({
+    createClient: builder.mutation<Client, Partial<Client>>({
       query: (payload) => ({
         url: '/clients', // URL for the create client request
         method: 'POST', // HTTP method
@@ -19,7 +20,11 @@ export const clientsApi = createApi({
       }),
       invalidatesTags: ['Client'],
     }),
+    getClients: builder.query<Client[], void>({
+        query: () => '/clients',
+        providesTags: ['Client'],
+    }),
   }),
 });
 
-export const { useCreateClientMutation } = clientsApi;
+export const { useCreateClientMutation, useGetClientsQuery } = clientsApi;

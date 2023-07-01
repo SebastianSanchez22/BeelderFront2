@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { Machine } from '@/utils/interfaces';
 
 // Set up an API  for machines
 export const machinesApi = createApi({
@@ -8,7 +9,7 @@ export const machinesApi = createApi({
   }),
   tagTypes: ['Machine'],
   endpoints: (builder) => ({
-    createMachine: builder.mutation({
+    createMachine: builder.mutation<Machine, Partial<Machine>>({
       query: (payload) => ({
         url: '/machine', // URL for the create machine request
         method: 'POST', // HTTP method
@@ -19,7 +20,11 @@ export const machinesApi = createApi({
       }),
       invalidatesTags: ['Machine'],
     }),
+    getMachines: builder.query<Machine[], void>({
+      query: () => '/machine',
+      providesTags: ['Machine'],
+    }),
   }),
 });
 
-export const { useCreateMachineMutation } = machinesApi;
+export const { useCreateMachineMutation, useGetMachinesQuery } = machinesApi;
