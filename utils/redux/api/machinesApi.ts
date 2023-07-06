@@ -24,6 +24,17 @@ export const machinesApi = createApi({
       query: () => '/machine',
       providesTags: ['Machine'],
     }),
+    updateMachine: builder.mutation<Machine, { machineId: string; payload: Partial<Machine> }>({
+      query: ({ machineId, payload }) => ({
+        url: `/machines/${machineId}`,
+        method: 'PUT',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+      invalidatesTags: ['Machine'],
+    }),
   }),
 });
 

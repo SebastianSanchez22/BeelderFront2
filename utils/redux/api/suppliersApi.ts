@@ -27,6 +27,17 @@ export const suppliersApi = createApi({
     getSupplierById: builder.query<Supplier, string>({
       query: (supplierId) => `/suppliers/${supplierId}`,
       providesTags: (result, error, supplierId) => [{ type: 'Supplier', id: supplierId }],
+    }),
+    updateSupplier: builder.mutation<Supplier, { supplierId: string; payload: Partial<Supplier> }>({
+      query: ({ supplierId, payload }) => ({
+        url: `/suppliers/${supplierId}`,
+        method: 'PUT',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+      invalidatesTags: ['Supplier'],
     }),    
   }),
 });

@@ -24,6 +24,17 @@ export const clientsApi = createApi({
         query: () => '/clients',
         providesTags: ['Client'],
     }),
+    updateClient: builder.mutation<Client, { clientId: string; payload: Partial<Client> }>({
+        query: ({ clientId, payload }) => ({
+          url: `/clients/${clientId}`,
+          method: 'PUT',
+          body: payload,
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        }),
+        invalidatesTags: ['Client'],
+    }),
   }),
 });
 
