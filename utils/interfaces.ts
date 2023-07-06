@@ -20,3 +20,10 @@ export interface Client {
     address: string;
     phone: number;
 }
+
+export interface UpdateClientData {
+  clientId?: string;
+  name?: string;
+  address?: string;
+  phone?: number;
+}

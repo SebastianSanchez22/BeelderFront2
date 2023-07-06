@@ -24,6 +24,10 @@ export const clientsApi = createApi({
         query: () => '/clients',
         providesTags: ['Client'],
     }),
+    getClientById: builder.query<Client, string>({
+      query: (clientId) => `/clients/${clientId}`,
+      providesTags: (result, error, clientId) => [{ type: 'Client', id: clientId }],
+    }),
     updateClient: builder.mutation<Client, { clientId: string; payload: Partial<Client> }>({
         query: ({ clientId, payload }) => ({
           url: `/clients/${clientId}`,
@@ -38,4 +42,5 @@ export const clientsApi = createApi({
   }),
 });
 
-export const { useCreateClientMutation, useGetClientsQuery } = clientsApi;
+export const { useCreateClientMutation, useGetClientsQuery, useGetClientByIdQuery,
+   useUpdateClientMutation } = clientsApi;

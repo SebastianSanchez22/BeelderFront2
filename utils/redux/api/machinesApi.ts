@@ -24,10 +24,14 @@ export const machinesApi = createApi({
       query: () => '/machine',
       providesTags: ['Machine'],
     }),
+    getMachineById: builder.query<Machine, string>({
+      query: (machineId) => `/machine/${machineId}`,
+      providesTags: (result, error, machineId) => [{ type: 'Machine', id: machineId }],
+    }),
     updateMachine: builder.mutation<Machine, { machineId: string; payload: Partial<Machine> }>({
       query: ({ machineId, payload }) => ({
         url: `/machines/${machineId}`,
-        method: 'PUT',
+        method: 'PATCH',
         body: payload,
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -38,4 +42,4 @@ export const machinesApi = createApi({
   }),
 });
 
-export const { useCreateMachineMutation, useGetMachinesQuery } = machinesApi;
+export const { useCreateMachineMutation, useGetMachinesQuery, useGetMachineByIdQuery, useUpdateMachineMutation } = machinesApi;

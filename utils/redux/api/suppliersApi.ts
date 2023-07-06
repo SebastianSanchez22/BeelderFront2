@@ -31,7 +31,7 @@ export const suppliersApi = createApi({
     updateSupplier: builder.mutation<Supplier, { supplierId: string; payload: Partial<Supplier> }>({
       query: ({ supplierId, payload }) => ({
         url: `/suppliers/${supplierId}`,
-        method: 'PUT',
+        method: 'PATCH',
         body: payload,
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -42,4 +42,5 @@ export const suppliersApi = createApi({
   }),
 });
 
-export const { useCreateSupplierMutation, useGetSuppliersQuery, useGetSupplierByIdQuery } = suppliersApi;
+export const { useCreateSupplierMutation, useGetSuppliersQuery, 
+  useGetSupplierByIdQuery, useUpdateSupplierMutation } = suppliersApi;
