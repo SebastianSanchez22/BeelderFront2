@@ -11,9 +11,9 @@ export const suppliersApi = createApi({
   endpoints: (builder) => ({
     createSupplier: builder.mutation<Supplier, Partial<Supplier>>({
       query: (payload) => ({
-        url: '/suppliers', // URL for the create supplier request
-        method: 'POST', // HTTP method
-        body: payload, // Request payload (data)
+        url: '/suppliers',
+        method: 'POST',
+        body: payload,
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
@@ -24,7 +24,11 @@ export const suppliersApi = createApi({
       query: () => '/suppliers',
       providesTags: ['Supplier'],
     }),
+    getSupplierById: builder.query<Supplier, string>({
+      query: (supplierId) => `/suppliers/${supplierId}`,
+      providesTags: (result, error, supplierId) => [{ type: 'Supplier', id: supplierId }],
+    }),    
   }),
 });
 
-export const { useCreateSupplierMutation, useGetSuppliersQuery } = suppliersApi;
+export const { useCreateSupplierMutation, useGetSuppliersQuery, useGetSupplierByIdQuery } = suppliersApi;
