@@ -3,6 +3,7 @@
 import Header from "@/components/header"
 import './globals.css'
 import { Providers } from "@/utils/redux/provider"
+import VristoSidebar from "@/components/sideBarTest"
 
 
 export const metadata = {
@@ -22,6 +23,7 @@ export default function RootLayout({
     </head>
     <body>
       <Header />
+      <VristoSidebar />
       <div className="bg-white">
         <Providers>{children}</Providers>
       </div>

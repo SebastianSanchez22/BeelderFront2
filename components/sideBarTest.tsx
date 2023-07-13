@@ -4,7 +4,7 @@ import Link from 'next/link';
 import AnimateHeight from 'react-animate-height';
 import { useState, useEffect } from 'react';
 
-const Sidebar = () => {
+export default function VristoSidebar() {
     const [currentMenu, setCurrentMenu] = useState<string>('');
     const [errorSubMenu, setErrorSubMenu] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -1050,5 +1050,3 @@ const Sidebar = () => {
         </div>
     );
 };
-
-export default Sidebar;
